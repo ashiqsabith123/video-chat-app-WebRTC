@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a815a59ac0.js" crossorigin="anonymous"></script>
+
+    <style>
+        .container {
+            position: relative;
+        }
+
+        .local {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+        }
+
+        .roomID {
+            position: absolute;
+            margin-top: 35vh;
+            width: 15em;
+            height: 7rem;
+            margin-left: 30px;
+            background-color: wheat;
+            border-radius: 15px;
+        }
+
+        .localVideo {
+            margin-right: -64px;
+            margin-top: -48px;
+            margin-bottom: -85px;
+        }
+    </style>
+
+</head>
+
+<body style="height: 100vh; background-color: black;">
+
+   {{if .roomID}}
+   <div class="roomID">
+        <div id="emailHelp" class="form-text ms-3 mt-2">Copy code</div> 
+        <div class=" ms-3 mt-4"><label for="">Code: {{.roomID}}</label></div>
+   </div>
+   {{end}}
+
+    <div class="container">
+        <div class="col-md-12 pt-5" style="height: 100;">
+
+            <div class="col-md-12 d-flex justify-content-center ">
+                <video autoplay width="1000" height="480">
+                    <source src="/static/promo onam kochi brocamp.mp4" type="video/mp4">
+                </video>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-12 d-flex justify-content-center mt-5">
+            <div class="col-md-3 d-flex justify-content-center mt-2">
+                <button type="button" onclick="connectPeer()" class="btn btn-success me-4" style="height: 80px; width: 80px; border-radius: 50px;"><i class="fa-solid fa-phone" style="color: #ffffff; font-size: 25px;"></i></button>
+                <button type="button" class="btn btn-danger" style="height: 80px; width: 80px; border-radius: 50px;"><i
+                        class="fa-solid fa-xmark" style="color: #ffffff; font-size: 30px;"></i></button>
+            </div>
+        </div>
+
+        <div class="local">
+            <video class="localVideo" id="localvideo" autoplay width="250" height="250"></video>
+        </div>
+
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
