@@ -102,7 +102,7 @@ function callUser() {
     console.log("Calling Other User");
     createPeer()
 
-    this.localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
 }
 
@@ -115,7 +115,7 @@ async function handleOffer(offer) {
     try {
         createPeer()
 
-        console.log("A");
+      
 
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
@@ -133,7 +133,7 @@ async function handleOffer(offer) {
 
 
 function createPeer() {
-    console.log("n");
+   
     console.log("Creating Peer Connection");
     peerConnection = new RTCPeerConnection({ iceServers })
 
@@ -141,7 +141,7 @@ function createPeer() {
     peerConnection.onicecandidate = handleIceCandidateEvent;
     peerConnection.ontrack = handleTrackEvent;
 
-    console.log("e");
+    
 }
 
 
