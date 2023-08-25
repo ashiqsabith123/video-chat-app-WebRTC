@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -93,6 +94,8 @@ func JoinRoomRequestHandler(c *gin.Context) {
 		msg.RoomID = roomID
 
 		broadcast <- msg
+
+		time.Sleep(1 * time.Second)
 	}
 
 }
