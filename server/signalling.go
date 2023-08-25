@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -56,10 +55,9 @@ func broadcaster() {
 				err := client.Conn.WriteJSON(msg.Message)
 
 				if err != nil {
-					log.Fatal(err)
+					fmt.Println(err)
 					client.Conn.Close()
 				}
-				time.Sleep(5 * time.Second)
 			}
 		}
 	}
@@ -87,7 +85,8 @@ func JoinRoomRequestHandler(c *gin.Context) {
 		err = ws.ReadJSON(&msg.Message)
 
 		if err != nil {
-			log.Println("error while reading msg", err)
+			fmt.Println("error while reading msg", err)
+			return
 		}
 
 		msg.Client = ws
