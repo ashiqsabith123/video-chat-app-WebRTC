@@ -20,8 +20,8 @@ let ws;
     try {
 
 
-        const allDevices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = allDevices.filter(device => device.kind === 'videoinput');
+        let allDevices = await navigator.mediaDevices.enumerateDevices();
+        let cameras = allDevices.filter(device => device.kind === 'videoinput');
     
         if (cameras.length === 0) {
             console.log('No cameras available.');
