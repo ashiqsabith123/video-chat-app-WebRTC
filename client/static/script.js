@@ -116,7 +116,7 @@ function callUser() {
     console.log("Calling Other User");
     createPeer()
 
-    this.localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
 }
 
@@ -179,8 +179,8 @@ const handleTrackEvent = (e) => {
     console.log("Received Tracks");
     if (e.streams.length > 0) {
         // Assuming you want to display the first video stream
-        partnerVideo.srcObject = e.streams[0];
-        e.streams.getTracks().forEach(track => partnerVideo.addTrack(track, e.streams));
+        //partnerVideo.srcObject = e.streams[0];
+        e.streams[0].getTracks().forEach(track => partnerVideo.addTrack(track, e.streams[0]));
     }
 };
 
