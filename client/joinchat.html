@@ -43,6 +43,7 @@
 
 <body style="height: 100vh; background-color: black;">
 
+
     {{if .roomID}}
     <div class="roomID" style="display: none;">
          <div id="emailHelp" class="form-text ms-3 mt-2">Copy code</div> 
@@ -50,12 +51,7 @@
     </div>
     {{end}}
 
-   {{if .roomID}}
-   <div class="roomID">
-        <div id="emailHelp" class="form-text ms-3 mt-2">Copy code</div> 
-        <div class=" ms-3 mt-4"><label id="roomID" for="">Code: {{.roomID}}</label></div>
-   </div>
-   {{end}}
+  
 
     <div class="container">
         <div class="col-md-12 pt-5" style="height: 100;">
@@ -70,7 +66,7 @@
 
         <div class="col-md-12 d-flex justify-content-center mt-5">
             <div class="col-md-3 d-flex justify-content-center mt-2">
-                <button type="button" onclick="connectHostPeer('{{.roomID}}')" class="btn btn-success me-4" style="height: 80px; width: 80px; border-radius: 50px;"><i class="fa-solid fa-phone" style="color: #ffffff; font-size: 25px;"></i></button>
+                <button type="button" onclick="connectUserPeer('{{.roomID}}')" class="btn btn-success me-4" style="height: 80px; width: 80px; border-radius: 50px;"><i class="fa-solid fa-phone" style="color: #ffffff; font-size: 25px;"></i></button>
                 <button type="button" class="btn btn-danger" style="height: 80px; width: 80px; border-radius: 50px;"><i
                         class="fa-solid fa-xmark" style="color: #ffffff; font-size: 30px;"></i></button>
             </div>

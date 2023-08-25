@@ -16,6 +16,8 @@ func main() {
 
 	router.GET("/", server.GetHomePage)
 	router.GET("/create", server.CreateRoomRequestHandler)
+	router.GET("/join", server.JoinRoomRequestHandler)
+	router.POST("/joinroom", server.JoinRoomHandler)
 
 	router.Run(":3443")
 }
