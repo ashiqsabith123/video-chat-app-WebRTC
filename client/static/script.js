@@ -1,6 +1,6 @@
 
-const localVideo = document.getElementById('localvideo');
-const partnerVideo = document.getElementById('partnerVideo')
+let localVideo = document.getElementById('localvideo');
+let partnerVideo = document.getElementById('partnerVideo')
 
 
 
