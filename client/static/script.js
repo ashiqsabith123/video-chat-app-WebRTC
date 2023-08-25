@@ -119,10 +119,12 @@ async function handleOffer(offer) {
 
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+       
 
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
+
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
         ws.send(JSON.stringify({ answer: peerConnection.localDescription }));
     } catch (err) {
@@ -170,26 +172,21 @@ const handleIceCandidateEvent = (e) => {
 
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
-    // console.log(e.streams.length);
-    // if (e.streams.length > 0) {
-    //     // Assuming you want to display both audio and video streams
-    //     const combinedStream = new MediaStream();
+    console.log(e.streams.length);
+    if (e.streams.length > 0) {
+        // Assuming you want to display both audio and video streams
+        const combinedStream = new MediaStream();
 
-    //     e.streams.forEach(stream => {
-    //         stream.getTracks().forEach(track => {
-    //             combinedStream.addTrack(track);
-    //         });
-    //     });
+        e.streams.forEach(stream => {
+            stream.getTracks().forEach(track => {
+                combinedStream.addTrack(track);
+            });
+        });
 
-    //     partnerVideo.srcObject = combinedStream;
-    // }
+        partnerVideo.srcObject = combinedStream;
+    }
 
-    console.log(e.streams[0])
-    remoteStream = e.streams[0];
-    console.log(partnerVideo);
-    
-    partnerVideo.srcObject = remoteStream;
-    console.log(partnerVideo.srcObject);
+  
 
     // You can handle other streams or track types here if needed
 };
