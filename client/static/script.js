@@ -115,14 +115,13 @@ async function handleOffer(offer) {
     try {
         createPeer()
 
-      
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
-        
+       
 
         const answer = await peerConnection.createAnswer();
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
         await peerConnection.setLocalDescription(answer);
 
         
