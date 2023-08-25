@@ -177,7 +177,7 @@ const handleIceCandidateEvent = (e) => {
 
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
-    partnerVideo.srcObject = e.streams[0];
+    partnerVideo.srcObject = e.streams;
 };
 
 // function connectUserPeer(roomID){
