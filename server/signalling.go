@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -58,6 +59,7 @@ func broadcaster() {
 					log.Fatal(err)
 					client.Conn.Close()
 				}
+				time.Sleep(5 * time.Second)
 			}
 		}
 	}
