@@ -184,7 +184,7 @@ const handleTrackEvent = (e) => {
     //     partnerVideo.srcObject = combinedStream;
     // }
 
-    console.log(e.stream)
+    console.log(e.streams)
     remoteStream = e.streams;
     partnerVideo.srcObject = remoteStream;
 
