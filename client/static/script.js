@@ -50,23 +50,20 @@ let ws;
 })(connectHostPeer)
 
 
-
 function connectHostPeer() {
-    let roomID = document.getElementById('roomIDH').innerHTML
+    let roomID = document.getElementById('roomIDH').innerHTML;
     ws = new WebSocket(`wss://shiftsync.online/join?roomID=${roomID}`);
+    
     ws.addEventListener('open', (event) => {
         console.log('WebSocket connection opened:', event);
-        ws.send(JSON.stringify(
-            {
-                join: true,
-               
-            }
-
-        ))
+        ws.send(JSON.stringify({
+            join: true,
+        }));
     });
 
-    connectpeer()
+    connectpeer();
 }
+
 
 
 
@@ -123,23 +120,26 @@ function callUser() {
 
 }
 
-const handleOffer = async (offer) => {
+
+
+async function handleOffer(offer) {
     console.log("Received Offer, Creating Answer");
     createPeer();
 
-    await peerConnection.setRemoteDescription(
-        new RTCSessionDescription(offer)
-    );
+    try {
+        await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
-    await localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
-    const answer = await peerConnection.createAnswer();
-    await peerConnection.setLocalDescription(answer);
+        const answer = await peerConnection.createAnswer();
+        await peerConnection.setLocalDescription(answer);
 
-    ws.send(
-        JSON.stringify({ answer: peerConnection.localDescription })
-    );
-};
+        ws.send(JSON.stringify({ answer: peerConnection.localDescription }));
+    } catch (err) {
+        console.error('Error handling offer:', err);
+    }
+}
+
 
 
 function createPeer() {
