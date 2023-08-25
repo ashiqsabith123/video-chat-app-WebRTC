@@ -1,6 +1,6 @@
 
-let localVideo = document.getElementById('localvideo');
-let partnerVideo = document.getElementById('partnerVideo')
+const localVideo = document.getElementById('localvideo');
+const partnerVideo = document.getElementById('partnerVideo')
 
 
 
@@ -20,8 +20,8 @@ let ws;
     try {
 
 
-        let allDevices = await navigator.mediaDevices.enumerateDevices();
-        let cameras = allDevices.filter(device => device.kind === 'videoinput');
+        const allDevices = await navigator.mediaDevices.enumerateDevices();
+        const cameras = allDevices.filter(device => device.kind === 'videoinput');
     
         if (cameras.length === 0) {
             console.log('No cameras available.');
