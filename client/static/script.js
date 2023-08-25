@@ -8,7 +8,7 @@ const iceServers = [
     { urls: 'stun:stun.l.google.com:19302' },
 ];
 
-var localStream=10;
+var localStream;
 let peerConnection;
 
 
@@ -18,8 +18,26 @@ let ws;
 (async function startCall(connectHostPeer) {
 
     try {
+
+
+        const allDevices = await navigator.mediaDevices.enumerateDevices();
+        const cameras = allDevices.filter(device => device.kind === 'videoinput');
+    
+        if (cameras.length === 0) {
+            console.log('No cameras available.');
+            return;
+        }
+    
+        console.log(cameras);
+    
+        const constraints = {
+            audio: true,
+            video: {
+                deviceId: cameras[0].deviceId, // You can change the index as needed
+            },
+        };
      
-        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        localStream = await navigator.mediaDevices.getUserMedia(constraints);
         console.log("media devices fetched");
         localVideo.srcObject = localStream;
         connectHostPeer()
@@ -31,7 +49,7 @@ let ws;
     //console.log("local",localStream);
 })(connectHostPeer)
 
-console.log("local",localStream);
+
 
 function connectHostPeer() {
     let roomID = document.getElementById('roomIDH').innerHTML
