@@ -177,7 +177,10 @@ const handleIceCandidateEvent = (e) => {
 
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
-    partnerVideo.srcObject = e.streams;
+    if (e.streams.length > 0) {
+        // Assuming you want to display the first video stream
+        partnerVideo.srcObject = e.streams[0];
+    }
 };
 
 // function connectUserPeer(roomID){
