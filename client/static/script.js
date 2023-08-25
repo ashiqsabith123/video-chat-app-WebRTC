@@ -170,19 +170,23 @@ const handleIceCandidateEvent = (e) => {
 
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
-    console.log(e.streams.length);
-    if (e.streams.length > 0) {
-        // Assuming you want to display both audio and video streams
-        const combinedStream = new MediaStream();
+    // console.log(e.streams.length);
+    // if (e.streams.length > 0) {
+    //     // Assuming you want to display both audio and video streams
+    //     const combinedStream = new MediaStream();
 
-        e.streams.forEach(stream => {
-            stream.getTracks().forEach(track => {
-                combinedStream.addTrack(track);
-            });
-        });
+    //     e.streams.forEach(stream => {
+    //         stream.getTracks().forEach(track => {
+    //             combinedStream.addTrack(track);
+    //         });
+    //     });
 
-        partnerVideo.srcObject = combinedStream;
-    }
+    //     partnerVideo.srcObject = combinedStream;
+    // }
+
+    remoteStream = e.stream;
+    partnerVideo.srcObject = remoteStream;
+
     // You can handle other streams or track types here if needed
 };
 
