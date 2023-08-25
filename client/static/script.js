@@ -184,8 +184,8 @@ const handleTrackEvent = (e) => {
     //     partnerVideo.srcObject = combinedStream;
     // }
 
-    console.log(e.streams)
-    remoteStream = e.streams;
+    console.log(e.streams[0])
+    remoteStream = e.streams[0];
     partnerVideo.srcObject = remoteStream;
 
     // You can handle other streams or track types here if needed
