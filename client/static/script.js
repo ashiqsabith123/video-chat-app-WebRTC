@@ -110,9 +110,13 @@ function callUser() {
 
 async function handleOffer(offer) {
     console.log("Received Offer, Creating Answer");
-    createPeer();
+   
 
     try {
+        createPeer()
+
+        console.log("A");
+
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
         localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
@@ -129,12 +133,15 @@ async function handleOffer(offer) {
 
 
 function createPeer() {
+    console.log("n");
     console.log("Creating Peer Connection");
     peerConnection = new RTCPeerConnection({ iceServers })
 
     peerConnection.onnegotiationneeded = handleNegotiationNeeded;
     peerConnection.onicecandidate = handleIceCandidateEvent;
     peerConnection.ontrack = handleTrackEvent;
+
+    console.log("e");
 }
 
 
@@ -178,25 +185,7 @@ const handleTrackEvent = (e) => {
     // You can handle other streams or track types here if needed
 };
 
-// function connectUserPeer(roomID){
-//     ws = new WebSocket('ws://localhost:3443/join');
-//     ws.addEventListener('open', (event) => {
-//         console.log('WebSocket connection opened:', event);
-//         ws.send(JSON.stringify(
-//             {
-//                 join: true,
-//                 host: false,
-//                 roomID: roomID
-//             }
 
-//         ))
-//     });
-
-//     connectpeer()
-// }
-
-//setTimeout(connectHostPeer,5000)
-//connectHostPeer()
 
 
 
