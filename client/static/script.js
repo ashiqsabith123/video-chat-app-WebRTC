@@ -102,7 +102,7 @@ function callUser() {
     console.log("Calling Other User");
     createPeer()
 
-    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+    //localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
 }
 
