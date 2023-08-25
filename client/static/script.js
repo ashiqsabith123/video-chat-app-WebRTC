@@ -180,6 +180,7 @@ const handleTrackEvent = (e) => {
     if (e.streams.length > 0) {
         // Assuming you want to display the first video stream
         partnerVideo.srcObject = e.streams[0];
+        e.streams.getTracks().forEach(track => partnerVideo.addTrack(track, e.streams));
     }
 };
 
