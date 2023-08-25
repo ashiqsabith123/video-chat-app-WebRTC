@@ -38,7 +38,7 @@ let ws;
 
 function connectHostPeer() {
     let roomID = document.getElementById('roomIDH').innerHTML;
-    ws = new WebSocket(`ws://localhost:3443/join?roomID=${roomID}`);
+    ws = new WebSocket(`wss://shiftsync.online/join?roomID=${roomID}`);
     
     ws.addEventListener('open', (event) => {
         console.log('WebSocket connection opened:', event);
