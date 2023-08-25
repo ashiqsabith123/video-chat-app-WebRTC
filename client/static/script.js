@@ -119,12 +119,12 @@ async function handleOffer(offer) {
 
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
-       
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
 
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        
 
         ws.send(JSON.stringify({ answer: peerConnection.localDescription }));
     } catch (err) {
