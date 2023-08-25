@@ -116,7 +116,7 @@ function callUser() {
     console.log("Calling Other User");
     createPeer()
 
-    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+    this.localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
 }
 
@@ -178,10 +178,18 @@ const handleIceCandidateEvent = (e) => {
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
     if (e.streams.length > 0) {
-        // Assuming you want to display the first video stream
-        //partnerVideo.srcObject = e.streams[0];
-        e.streams[0].getTracks().forEach(track => partnerVideo.addTrack(track, e.streams[0]));
+        // Assuming you want to display both audio and video streams
+        const combinedStream = new MediaStream();
+
+        e.streams.forEach(stream => {
+            stream.getTracks().forEach(track => {
+                combinedStream.addTrack(track);
+            });
+        });
+
+        partnerVideo.srcObject = combinedStream;
     }
+    // You can handle other streams or track types here if needed
 };
 
 // function connectUserPeer(roomID){
