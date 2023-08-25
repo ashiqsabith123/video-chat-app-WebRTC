@@ -170,6 +170,7 @@ const handleIceCandidateEvent = (e) => {
 
 const handleTrackEvent = (e) => {
     console.log("Received Tracks");
+    console.log(e.streams.length);
     if (e.streams.length > 0) {
         // Assuming you want to display both audio and video streams
         const combinedStream = new MediaStream();
