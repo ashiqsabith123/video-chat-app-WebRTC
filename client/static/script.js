@@ -186,6 +186,7 @@ const handleTrackEvent = (e) => {
 
     console.log(e.streams[0])
     remoteStream = e.streams[0];
+    console.log(partnerVideo);
     partnerVideo.srcObject = remoteStream;
 
     // You can handle other streams or track types here if needed
