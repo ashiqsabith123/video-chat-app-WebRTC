@@ -99,3 +99,10 @@ func JoinRoomRequestHandler(c *gin.Context) {
 	}
 
 }
+func CloseRoomRequestHandler(c *gin.Context) {
+	roomID := c.Query("roomID")
+
+	AllRooms.DeleteRoom(roomID)
+
+	c.Redirect(http.StatusSeeOther, "/")
+}

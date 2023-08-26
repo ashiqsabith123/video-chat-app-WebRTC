@@ -192,6 +192,20 @@ const handleTrackEvent = (e) => {
     // You can handle other streams or track types here if needed
 };
 
+function hangUp() {
+    peerConnection.close();
+    peerConnection = null;
+    localStream.getTracks().forEach(track => track.stop());
+    localStream = null;
+    remoteStream = null;
+    localVideo.srcObject = null;
+    remoteVideo.srcObject = null;
+
+    console.log("all connections are closed")
+}
+
+
+
 
 
 
