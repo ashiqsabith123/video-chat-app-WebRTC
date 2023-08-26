@@ -25,8 +25,9 @@ let ws;
         
 
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        local = await navigator.mediaDevices.getUserMedia({ video: true});
         console.log("media devices fetched");
-        localVideo.srcObject = localStream;
+        localVideo.srcObject = local;
         connectHostPeer();
 
     } catch (error) {
