@@ -8,6 +8,7 @@ const partnerVideo = document.getElementById('partnerVideo')
 
 const iceServers = [
     { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'turn:13.53.79.31', username: 'ashiqsabith', credential: 'ashiq@123' }, 
 ];
 
 var localStream;
