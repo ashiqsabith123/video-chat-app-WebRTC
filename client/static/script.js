@@ -1,31 +1,18 @@
 
 const localVideo = document.getElementById('localvideo');
 const partnerVideo = document.getElementById('partnerVideo')
-
-
-
-
-
 const iceServers = [
     { urls: 'stun:stun.l.google.com:19302' },
-    { urls: 'turn:13.53.79.31', username: 'ashiqsabith', credential: 'ashiq@123' }, 
+    { urls: 'turn:13.53.79.31', username: 'ashiqsabith', credential: 'ashiq@123' },
 ];
 
 var localStream;
 let peerConnection;
-
-
-
 let ws;
 
 (async function startCall() {
-    
-
     try {
-        
-
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-       
         console.log("media devices fetched");
         localVideo.srcObject = localStream;
         localVideo.muted = true
@@ -42,7 +29,7 @@ let ws;
 function connectHostPeer() {
     let roomID = document.getElementById('roomIDH').innerHTML;
     ws = new WebSocket(`wss://shiftsync.online/join?roomID=${roomID}`);
-    
+
     ws.addEventListener('open', (event) => {
         console.log('WebSocket connection opened:', event);
         ws.send(JSON.stringify({
@@ -58,10 +45,7 @@ function connectHostPeer() {
 
 
 async function connectpeer() {
-
-
     try {
-        console.log("in try");
         ws.addEventListener('message', (e) => {
             const message = JSON.parse(e.data);
             console.log("message:", message);
@@ -104,7 +88,6 @@ async function connectpeer() {
 function callUser() {
     console.log("Calling Other User");
     createPeer()
-
     localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
 }
@@ -113,21 +96,14 @@ function callUser() {
 
 async function handleOffer(offer) {
     console.log("Received Offer, Creating Answer");
-   
-
     try {
         createPeer()
 
         localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-
-       
-
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
-
-        
 
         ws.send(JSON.stringify({ answer: peerConnection.localDescription }));
     } catch (err) {
@@ -138,15 +114,11 @@ async function handleOffer(offer) {
 
 
 function createPeer() {
-   
     console.log("Creating Peer Connection");
     peerConnection = new RTCPeerConnection({ iceServers })
-
     peerConnection.onnegotiationneeded = handleNegotiationNeeded;
     peerConnection.onicecandidate = handleIceCandidateEvent;
     peerConnection.ontrack = handleTrackEvent;
-
-    
 }
 
 
@@ -177,7 +149,6 @@ const handleTrackEvent = (e) => {
     console.log("Received Tracks");
     console.log(e.streams.length);
     if (e.streams.length > 0) {
-        // Assuming you want to display both audio and video streams
         const combinedStream = new MediaStream();
 
         e.streams.forEach(stream => {
@@ -189,13 +160,10 @@ const handleTrackEvent = (e) => {
         partnerVideo.srcObject = combinedStream;
     }
 
-  
-
-    // You can handle other streams or track types here if needed
 };
 
 function hangUp() {
-    if (peerConnection){
+    if (peerConnection) {
         peerConnection.close();
         peerConnection = null;
         localStream.getTracks().forEach(track => track.stop());

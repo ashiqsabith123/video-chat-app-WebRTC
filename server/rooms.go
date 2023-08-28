@@ -30,7 +30,7 @@ func (r *RoomMap) CreateRoom() string {
 
 	rand.Seed(time.Now().UnixNano())
 
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	b := make([]rune, 8)
 
 	for i := range b {
